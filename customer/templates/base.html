@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Include Chatbot in base template -->
+{% include 'chatbot.html' %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Vehicle Share System</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-eval';">
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: steelblue">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'home' %}" style="font-weight: bold;">EcoRide</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+                
+                <!-- Show "About Us" and "Services" sections when logged out or as a customer -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        About Us
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+                        <li><a class="dropdown-item" href="{% url 'vehicles' %}">Vehicles</a></li>
+                        <li><a class="dropdown-item" href="{% url 'locations' %}">Locations</a></li>
+                        <li><a class="dropdown-item" href="{% url 'pricing' %}">Pricing and Passes</a></li>
+                        <li><a class="dropdown-item" href="{% url 'guidelines' %}">Guidelines</a></li>
+                    </ul>
+                </li>
+                {% if not request.session.user_type or request.session.user_type == 'customer' %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">Services</a>
+                    <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                        <li><a class="dropdown-item" href="{% url 'vip' %}">Map Navigation</a></li>
+                        <li><a class="dropdown-item" href="{% url 'rent_vehicle' %}">Rent Vehicle</a></li>
+                        <li><a class="dropdown-item" href="{% url 'return_vehicle' %}">Return Vehicle</a></li>
+                        <li><a class="dropdown-item" href="{% url 'report_vehicle' %}">Report Vehicle</a></li>
+                        <li><a class="dropdown-item" href="{% url 'pay_charges' %}">Pay Charges</a></li>
+                        <li><a class="dropdown-item" href="{% url 'feedback_page' %}">Feedback</a></li>
+                        <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+                    </ul>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                    {% if request.session.is_authenticated %}
+                    <form method="POST" action="{% url 'custom_logout' %}" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-link nav-link">Logout
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-right"
+                                viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8Zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5Z" />
+                            </svg>
+                        </button>
+                    </form>
+                    {% else %}
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-3">
+    {% if messages %}
+    <div id="alertContainer"
+        style="position: fixed; top: 10px; left: 50%; transform: translateX(-50%); z-index: 1050; width: auto; max-width: 90%;">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        // Automatically hide the alert after 5 seconds
+        setTimeout(function () {
+            var alertContainer = document.getElementById('alertContainer');
+            if (alertContainer) {
+                alertContainer.style.display = 'none';
+            }
+        }, 5000);
+
+        // Close the alert when the user clicks anywhere on the screen
+        document.addEventListener('click', function () {
+            var alertContainer = document.getElementById('alertContainer');
+            if (alertContainer) {
+                alertContainer.style.display = 'none';
+            }
+        });
+    </script>
+    {% endif %}
+</div>
+
+    <!-- Main Content Block -->
+    <div class="container-fluid mt-5">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

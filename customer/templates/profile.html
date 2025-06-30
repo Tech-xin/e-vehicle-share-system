@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid"
+    style="position: relative; overflow: hidden; width: calc(100% + 30px); height: 220px; display: flex; align-items: center; justify-content: flex-start; color: white; text-align: left; margin-top: -48px; margin-left: -15px; margin-right: -12px; padding: 0; background-color: steelblue;">
+    <div
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('/static/images/bg2.jpg'); background-size: cover; background-position: center; filter: blur(3px); z-index: 1; opacity: 0.7;">
+    </div>
+    <div class="col-md-8 col-lg-6" style="width: 100%; position: relative; z-index: 2; padding-left: 20px;">
+        <h2 class="text-center mb-4"
+            style="font-size: 3.2rem; font-weight: bold; text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5); color: #f0f8ff; margin: 0;">
+            MY PROFILE</h2>
+    </div>
+</div>
+
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="card shadow-lg rounded-3 border-0" style="background-color: #f8f9fa; max-width: 600px; width: 100%;">
+        <div class="card-header text-center bg-light border-0"
+            style="font-size: 1.75rem; font-weight: bold; color: steelblue;">
+            Account Overview
+        </div>
+        <div class="card-body text-center">
+            <div class="mb-4">
+                <p class="mb-2"><i class="bi bi-person-fill" style="color: steelblue; font-size: 1.3rem;"></i></p>
+                <p class="fw-bold mb-1">Username:</p>
+                <p>{{ customer.username }}</p>
+            </div>
+            <hr>
+            <div class="mb-4">
+                <p class="mb-2"><i class="bi bi-person-badge-fill" style="color: steelblue; font-size: 1.3rem;"></i></p>
+                <p class="fw-bold mb-1">First Name:</p>
+                <p>{{ customer.first_name }}</p>
+            </div>
+            <hr>
+            <div class="mb-4">
+                <p class="mb-2"><i class="bi bi-person-badge-fill" style="color: steelblue; font-size: 1.3rem;"></i></p>
+                <p class="fw-bold mb-1">Last Name:</p>
+                <p>{{ customer.last_name }}</p>
+            </div>
+            <hr>
+            <div class="mb-4">
+                <p class="mb-2"><i class="bi bi-envelope-fill" style="color: steelblue; font-size: 1.3rem;"></i></p>
+                <p class="fw-bold mb-1">Email:</p>
+                <p>{{ customer.email }}</p>
+            </div>
+            <hr>
+            <div class="mb-4">
+                <p class="mb-2"><i class="bi bi-phone-fill" style="color: steelblue; font-size: 1.3rem;"></i></p>
+                <p class="fw-bold mb-1">Mobile Number:</p>
+                <p>{{ customer.mobile_number }}</p>
+            </div>
+            <hr>
+            <div class="mb-4">
+                <p class="mb-2"><i class="bi bi-calendar2-date-fill" style="color: steelblue; font-size: 1.3rem;"></i>
+                </p>
+                <p class="fw-bold mb-1">Age:</p>
+                <p>{{ customer.age }}</p>
+            </div>
+            <button class="btn mt-3" data-bs-toggle="modal" data-bs-target="#editDetailsModal" style="background-color: rgb(79, 148, 204);">Edit
+                Details</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Editing Details -->
+<div class="modal fade" id="editDetailsModal" tabindex="-1" aria-labelledby="editDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editDetailsModalLabel">Edit Account Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editDetailsForm" method="post" action="{% url 'update_profile' %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="first_name" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="first_name" name="first_name"
+                            value="{{ customer.first_name }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="last_name" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="last_name" name="last_name"
+                            value="{{ customer.last_name }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" value="{{ customer.email }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="mobile_number" class="form-label">Mobile Number</label>
+                        <input type="text" class="form-control" id="mobile_number" name="mobile_number"
+                            value="{{ customer.mobile_number }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="age" class="form-label">Age</label>
+                        <input type="number" class="form-control" id="age" name="age" value="{{ customer.age }}">
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn" style="background-color: rgb(79, 148, 204);">Confirm</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap Icons CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+{% endblock %}

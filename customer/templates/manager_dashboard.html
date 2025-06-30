@@ -1,0 +1,410 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid"
+    style="position: relative; overflow: hidden; width: calc(100% + 30px); height: 450px; display: flex; align-items: center; justify-content: flex-start; color: white; text-align: left; margin-top: -48px; margin-left: -15px; margin-right: -15px; padding: 0;">
+    <div
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 90%; background-image: url('/static/images/viz1.jpg'); background-size: cover; background-position: center; filter: blur(5px); z-index: 1;">
+    </div>
+    <div style="width: 100%; position: relative; z-index: 2; padding-left: 20px;">
+        <h2 style="font-size: 4rem; font-weight: bold; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); margin: 0;">
+            Welcome!</h2>
+        <p style="font-size: 1.5rem; margin-top: 10px; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);">
+            Visualize your data for insights!</p>
+    </div>
+</div>
+
+<div class="container-fluid my-5">
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <h2>View your Data through Visuals</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <button class="btn btn-primary w-100 mb-3" onclick="displayChart('dailyRentalsChart')">Daily
+                Rentals</button>
+            <button class="btn btn-primary w-100 mb-3" onclick="displayChart('paymentPlanChart')">Payment Plans
+                Opted</button>
+            <button class="btn btn-primary w-100 mb-3" onclick="displayChart('revenueByCityChart')">Revenue by
+                City</button>
+            <button class="btn btn-primary w-100 mb-3" onclick="displayChart('vehicleStatusChart')">Vehicle Availability Status</button>
+            <button class="btn btn-primary w-100 mb-3" onclick="displayChart('defectiveReportsChart')">Defective Reports</button>
+            <button class="btn btn-primary w-100 mb-3" onclick="displayChart('rentalTypeChart')">Rental Type</button>
+            <button class="btn btn-primary w-100 mb-3" onclick="displayChart('averageRatingsChart')">Avg. Customer Ratings</button>
+            
+        </div>
+
+        <div class="col-md-10">
+            <div id="dailyRentalsChartContainer" class="chart-container" style="display: none; 
+                border: 1px solid #ccc; padding: 20px; border-radius: 10px; position:relative; width: 95%; height: 97%;">
+                <h3 class="text-center">Daily Rentals</h3>
+                <canvas id="dailyRentalsChart" width="500" height="300"></canvas>
+            </div>
+
+            <div id="paymentPlanChartContainer" class="chart-container"
+                style="display: none; border: 1px solid #ddd; padding: 15px; border-radius: 8px; text-align: center;">
+                <h3 class="text-center">Payment Plans Opted</h3>
+                <canvas id="paymentPlanChart" width="550" height="550" style="margin: 0 auto; display: block;"></canvas>
+            </div>
+
+            <div id="revenueByCityChartContainer" class="chart-container" style="display: none; 
+                border: 1px solid #ccc; padding: 20px; border-radius: 10px; position:relative; width: 95%; height: 97%;">
+                <h3 class="text-center">Revenue by City</h3>
+                <canvas id="revenueByCityChart" width="500" height="300"></canvas>
+            </div>
+            <div id="vehicleStatusChartContainer" class="chart-container" style="display: none; 
+                border: 1px solid #ccc; padding: 20px; border-radius: 10px; position:relative; width: 95%; height: 100%;">
+                <h3 class="text-center">Vehicle Availability Status</h3>
+                <canvas id="vehicleStatusChart" width="100" height="100"></canvas>
+            </div>
+            <div id="averageRatingsChartContainer" class="chart-container" style="display: none; 
+                border: 1px solid #ccc; padding: 20px; border-radius: 10px; position:relative">
+                <h3 class="text-center">Average Customer Ratings</h3>
+                <canvas id="averageRatingsChart" width="200" height="200"></canvas>
+            </div>
+            <div id="defectiveReportsChartContainer" class="chart-container" style="display: none; 
+                border: 1px solid #ccc; padding: 20px; border-radius: 10px; position:relative; width: 95%; height: 100%;">
+                <h3 class="text-center">Defective Reports by City</h3>
+                <canvas id="defectiveReportsChart" width="200" height="200"></canvas>
+            </div>
+            <div id="rentalTypeChartContainer" class="chart-container" style="display: none; 
+                border: 1px solid #ccc; padding: 20px; border-radius: 10px; position:relative; width: 95%; height: 97%;">
+                <h3 class="text-center">Rental Types</h3>
+                <canvas id="rentalTypeChart" width="300" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+   
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> <!-- Datalabels Plugin -->
+
+<script>
+    function displayChart(chartId) {
+        document.querySelectorAll('.chart-container').forEach(container => container.style.display = 'none');
+        document.getElementById(chartId + 'Container').style.display = 'block';
+    }
+
+    fetch("{% url 'get_daily_rentals_data' %}")
+        .then(response => response.json())
+        .then(data => {
+            const ctx = document.getElementById('dailyRentalsChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Rentals per Day',
+                        data: data.values,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: { title: { display: true, text: 'Date' } },
+                        y: { title: { display: true, text: 'Number of Rentals' }, beginAtZero: true }
+                    }
+                }
+            });
+        });
+
+    fetch("{% url 'get_payment_plan_data' %}")
+            .then(response => response.json())
+            .then(data => {
+                const ctx = document.getElementById('paymentPlanChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: data.labels,
+                        datasets: [{
+                            data: data.values,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.6)',
+                                'rgba(54, 162, 235, 0.6)',
+                                'rgba(255, 206, 86, 0.6)',
+                                'rgba(75, 192, 192, 0.6)'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: false, // Fix size
+                        plugins: {
+                            legend: { position: 'top' },
+                            datalabels: { // Datalabels plugin for percentage
+                                color: 'black',
+                                font: {
+                                    weight: 'bold'
+                                },
+                                formatter: (value, context) => {
+                                    const total = context.dataset.data.reduce((acc, curr) => acc + curr, 0);
+                                    const percentage = ((value / total) * 100).toFixed(1) + '%';
+                                    return percentage; // Display percentage on chart
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        const label = context.label || '';
+                                        const value = context.raw;
+                                        const total = context.dataset.data.reduce((acc, curr) => acc + curr, 0);
+                                        const percentage = ((value / total) * 100).toFixed(2);
+                                        return `${label}: ${percentage}%`;
+                                    }
+                                }
+                            },
+                            title: { display: true, text: 'Payment Plans Opted' }
+                        }
+                    },
+                    plugins: [ChartDataLabels] // Add the datalabels plugin
+                });
+            });
+
+    fetch("{% url 'get_revenue_by_city_data' %}")
+        .then(response => response.json())
+        .then(data => {
+            const ctx = document.getElementById('revenueByCityChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Revenue',
+                        data: data.values,
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: { title: { display: true, text: 'City' } },
+                        y: { title: { display: true, text: 'Revenue (in £)' }, beginAtZero: true }
+                    }
+                }
+            });
+        });
+    fetch("{% url 'vehicle_availability_status' %}")
+            .then(response => response.json())
+            .then(data => {
+                const ctx = document.getElementById('vehicleStatusChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: data.labels,
+                        datasets: [{
+                            data: data.counts,
+                            backgroundColor: [
+                                'rgba(210, 160, 233, 0.8)', // Lavender
+                                'rgba(46, 139, 87, 0.6)',   // Sea Green
+                                'rgba(255, 182, 193, 0.6)'  // Pastel Red
+                            ],
+                            borderColor: [
+                                'rgba(210, 160, 233, 0.8)', // Lavender
+                                'rgba(46, 139, 87, 1)',   // Sea Green
+                                'rgba(255, 182, 193, 1)'  // Pastel Red
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'top'
+                            },
+                            datalabels: {
+                                formatter: (value, ctx) => {
+                                    let sum = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                                    let percentage = (value / sum * 100).toFixed(1) + '%';
+                                    return percentage;
+                                },
+                                color: '#000',
+                                font: {
+                                    weight: 'bold'
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+    fetch("{% url 'average_ratings_vehicle_types' %}")
+            .then(response => response.json())
+            .then(data => {
+                    const ctx = document.getElementById('averageRatingsChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: data.labels,
+                            datasets: [
+                                    {
+                                        label: 'Vehicle Rating',
+                                        data: data.vehicle_ratings,
+                                        backgroundColor: 'rgba(75, 192, 192, 0.6)', // Light Green
+                                        borderColor: 'rgba(75, 192, 192, 1)',
+                                        borderWidth: 1
+                                    },
+                                    {
+                                        label: 'Journey Rating',
+                                        data: data.journey_ratings,
+                                        backgroundColor: 'rgba(153, 102, 255, 0.6)', // Lavender
+                                        borderColor: 'rgba(153, 102, 255, 1)',
+                                        borderWidth: 1
+                                    },
+                                    {
+                                        label: 'Experience Rating',
+                                        data: data.experience_ratings,
+                                        backgroundColor: 'rgba(255, 159, 64, 0.6)', // Pastel Orange
+                                        borderColor: 'rgba(255, 159, 64, 1)',
+                                        borderWidth: 1
+                                    }
+                                ]
+                            },
+                            options: {
+                                plugins: {
+                                    legend: {
+                                        display: true,
+                                        position: 'top'
+                                    },
+                                    datalabels: {
+                                        formatter: (value, ctx) => {
+                                            let sum = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                                            let percentage = (value / sum * 100).toFixed(1) + '%';
+                                            return percentage;
+                                        },
+                                        color: '#000',
+                                        font: {
+                                            weight: 'bold'
+                                        }
+                                    }
+                                },
+                                scales: {
+                                    x: {
+                                        title: {
+                                            display: true,
+                                            text: 'Vehicle Type'
+                                        }
+                                    },
+                                    y: {
+                                        title: {
+                                            display: true,
+                                            text: 'Average Customer Rating'
+                                        },
+                                        beginAtZero: true,
+                                        max: 5 // Assuming the ratings are out of 5
+                                    }
+                                }
+                            }
+        });
+     fetch("{% url 'defective_reports_by_city_data' %}")
+                    .then(response => response.json())
+                    .then(data => {
+                        const ctx = document.getElementById('defectiveReportsChart').getContext('2d');
+                        new Chart(ctx, {
+                            type: 'bar',  // Use 'bar' for vertical bars or 'horizontalBar' for horizontal bars
+                            data: {
+                                labels: data.labels,
+                                datasets: [{
+                                    label: 'Number of Reports',
+                                    data: data.values,
+                                    backgroundColor: 'rgba(54, 162, 235, 0.6)', // Light blue
+                                    borderColor: 'rgba(54, 162, 235, 1)',
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                indexAxis: 'y', // For horizontal bar chart
+                                scales: {
+                                    x: {
+                                        title: {
+                                            display: true,
+                                            text: 'Number of Reports'
+                                        },
+                                        beginAtZero: true
+                                    },
+                                    y: {
+                                        title: {
+                                            display: true,
+                                            text: 'City'
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    legend: {
+                                        display: false
+                                    }
+                                }
+                            }
+                        });
+    fetch("{% url 'rental_distribution_by_type' %}")
+                            .then(response => response.json())
+                            .then(data => {
+                                const ctx = document.getElementById('rentalTypeChart').getContext('2d');
+
+                                const chartData = {
+                                    labels: data.dates,
+                                    datasets: [
+                                        {
+                                            label: 'E-Scooter',
+                                            data: data.data.scooter,
+                                            backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                                            borderColor: 'rgba(75, 192, 192, 1)',
+                                            borderWidth: 1,
+                                            fill: true
+                                        },
+                                        {
+                                            label: 'E-Bike',
+                                            data: data.data.bike,
+                                            backgroundColor: 'rgba(153, 102, 255, 0.5)',
+                                            borderColor: 'rgba(153, 102, 255, 1)',
+                                            borderWidth: 1,
+                                            fill: true
+                                        }
+                                    ]
+                                };
+
+                                new Chart(ctx, {
+                                    type: 'line',
+                                    data: chartData,
+                                    options: {
+                                        responsive: true,
+                                        maintainAspectRatio: true, // Ensures responsiveness
+                                        aspectRatio: 1.5,
+                                        scales: {
+                                            x: {
+                                                title: {
+                                                    display: true,
+                                                    text: 'Date'
+                                                }
+                                            },
+                                            y: {
+                                                title: {
+                                                    display: true,
+                                                    text: 'Number of Rentals'
+                                                },
+                                                beginAtZero: true,
+                                                stacked: true
+                                            }
+                                        },
+                                        plugins: {
+                                            legend: {
+                                                display: true,
+                                                position: 'top'
+                                            }
+                                        }
+                                    }
+                                });
+    
+                            })
+    
+            })
+        .catch(error => console.error('Error fetching vehicle status data:', error));
+        });
+        </script>
+{% endblock %}

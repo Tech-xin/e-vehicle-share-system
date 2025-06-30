@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <!-- Page Title -->
+    <h1 class="text-center mb-4">GUIDELINES</h1>
+
+    <!-- Safety Guidelines Section -->
+    <div class="row mb-5" style="background-color:papayawhip; padding: 30px; border-radius: 15px;">
+        <div class="col-md-7">
+            <h2>Safety Guidelines
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                    class="bi bi-balloon-heart" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="m8 2.42-.717-.737c-1.13-1.161-3.243-.777-4.01.72-.35.685-.451 1.707.236 3.062C4.16 6.753 5.52 8.32 8 10.042c2.479-1.723 3.839-3.29 4.491-4.577.687-1.355.587-2.377.236-3.061-.767-1.498-2.88-1.882-4.01-.721L8 2.42Zm-.49 8.5c-10.78-7.44-3-13.155.359-10.063.045.041.089.084.132.129.043-.045.087-.088.132-.129 3.36-3.092 11.137 2.624.357 10.063l.235.468a.25.25 0 1 1-.448.224l-.008-.017c.008.11.02.202.037.29.054.27.161.488.419 1.003.288.578.235 1.15.076 1.629-.157.469-.422.867-.588 1.115l-.004.007a.25.25 0 1 1-.416-.278c.168-.252.4-.6.533-1.003.133-.396.163-.824-.049-1.246l-.013-.028c-.24-.48-.38-.758-.448-1.102a3.177 3.177 0 0 1-.052-.45l-.04.08a.25.25 0 1 1-.447-.224l.235-.468ZM6.013 2.06c-.649-.18-1.483.083-1.85.798-.131.258-.245.689-.08 1.335.063.244.414.198.487-.043.21-.697.627-1.447 1.359-1.692.217-.073.304-.337.084-.398Z" />
+                </svg>
+            </h2>
+            <p>Safety is our priority. Follow these guidelines to ensure a safe and enjoyable ride:</p>
+            <ul>
+                <li>Always wear a helmet while riding.</li>
+                <li>Be mindful of pedestrians and other vehicles on the road.</li>
+                <li>Check the brakes and tires before starting your ride.</li>
+                <li>Only use e-scooters if you are at least 16 years old, and e-bikes if you are at least 14.</li>
+                <li>Obey all traffic rules and signs.</li>
+            </ul>
+        </div>
+        <div class="col-md-5">
+            <img src="{% static 'images/safe.jpg' %}" alt="Safe" class="img-fluid rounded"
+                style="width: 100%; height: auto; margin-right: 0; border-radius: 10px;">
+        </div>
+    </div>
+
+    <!-- Parking Guidelines Section -->
+    <div class="row mb-5" style="background-color:powderblue; padding: 30px; border-radius: 15px;">
+        <div class="col-md-5">
+            <img src="{% static 'images/park.jpg' %}" alt="Park" class="img-fluid rounded"
+                style="width: 100%; height: auto; margin-right: 0; border-radius: 10px;">
+        </div>
+        <div class="col-md-7">
+            <h2>Parking Guidelines
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                    class="bi bi-car-front" viewBox="0 0 16 16">
+                    <path
+                        d="M4 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm10 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM6 8a1 1 0 0 0 0 2h4a1 1 0 1 0 0-2H6ZM4.862 4.276 3.906 6.19a.51.51 0 0 0 .497.731c.91-.073 2.35-.17 3.597-.17 1.247 0 2.688.097 3.597.17a.51.51 0 0 0 .497-.731l-.956-1.913A.5.5 0 0 0 10.691 4H5.309a.5.5 0 0 0-.447.276Z" />
+                    <path fill-rule="evenodd"
+                        d="M2.52 3.515A2.5 2.5 0 0 1 4.82 2h6.362c1 0 1.904.596 2.298 1.515l.792 1.848c.075.175.21.319.38.404.5.25.855.715.965 1.262l.335 1.679c.033.161.049.325.049.49v.413c0 .814-.39 1.543-1 1.997V13.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1.338c-1.292.048-2.745.088-4 .088s-2.708-.04-4-.088V13.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1.892c-.61-.454-1-1.183-1-1.997v-.413a2.5 2.5 0 0 1 .049-.49l.335-1.68c.11-.546.465-1.012.964-1.261a.807.807 0 0 0 .381-.404l.792-1.848ZM4.82 3a1.5 1.5 0 0 0-1.379.91l-.792 1.847a1.8 1.8 0 0 1-.853.904.807.807 0 0 0-.43.564L1.03 8.904a1.5 1.5 0 0 0-.03.294v.413c0 .796.62 1.448 1.408 1.484 1.555.07 3.786.155 5.592.155 1.806 0 4.037-.084 5.592-.155A1.479 1.479 0 0 0 15 9.611v-.413c0-.099-.01-.197-.03-.294l-.335-1.68a.807.807 0 0 0-.43-.563 1.807 1.807 0 0 1-.853-.904l-.792-1.848A1.5 1.5 0 0 0 11.18 3H4.82Z" />
+                </svg>
+            </h2>
+            <p>To keep our cities clean and accessible, follow these parking guidelines:</p>
+            <ul>
+                <li>Park your vehicle in designated parking areas marked for e-scooters and e-bikes.</li>
+                <li>Do not block sidewalks, entryways, or pedestrian crossings when parking.</li>
+                <li>Always park your vehicle upright and lock it securely.</li>
+                <li>Avoid parking in restricted zones, like private properties or in front of driveways.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Riding Zones Section -->
+    <div class="row mb-5" style="background-color:#d9f2e6; padding: 30px; border-radius: 15px;">
+        <div class="col-md-7">
+            <h2>Riding Zones
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-map"
+                    viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M15.817.113A.5.5 0 0 1 16 .5v14a.5.5 0 0 1-.402.49l-5 1a.502.502 0 0 1-.196 0L5.5 15.01l-4.902.98A.5.5 0 0 1 0 15.5v-14a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0L10.5.99l4.902-.98a.5.5 0 0 1 .415.103zM10 1.91l-4-.8v12.98l4 .8V1.91zm1 12.98 4-.8V1.11l-4 .8v12.98zm-6-.8V1.11l-4 .8v12.98l4-.8z" />
+                </svg>
+            </h2>
+            <p>Be aware of the designated riding zones for e-scooters and e-bikes:</p>
+            <ul>
+                <li>Stick to bike lanes or shared-use paths when available.</li>
+                <li>Avoid riding on sidewalks unless permitted in your area.</li>
+                <li>Use caution when riding in areas with heavy traffic.</li>
+                <li>Check the app for restricted or no-ride zones in your city.</li>
+            </ul>
+        </div>
+        <div class="col-md-5">
+            <img src="{% static 'images/area.jpg' %}" alt="Area" class="img-fluid rounded"
+                style="width: 90%; height: auto; margin-right: 0; border-radius: 10px;">
+        </div>
+    </div>
+
+    <!-- Additional Information Section -->
+    <div class="row mb-5" style="background-color: thistle; padding: 30px; border-radius: 15px;">
+        <div class="col-md-5">
+            <img src="{% static 'images/other.jpg' %}" alt="Other" class="img-fluid rounded"
+                style="width: 80%; height: auto; margin-right: 0; border-radius: 10px;">
+        </div>
+        <div class="col-md-7">
+            <h2>Other Important Guidelines
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                    class="bi bi-emoji-smile" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path
+                        d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z" />
+                </svg>
+            </h2>
+            <ul>
+                <li>Respect your fellow riders and pedestrians.</li>
+                <li>Report any damaged or malfunctioning vehicles through the app.</li>
+                <li>Follow local laws and regulations for riding e-scooters and e-bikes.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

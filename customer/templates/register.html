@@ -1,0 +1,216 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    body {
+        background-image: url("{% static 'images/b2.avif' %}");
+        background-size: cover;
+        background-repeat: repeat;
+        background-position: center;
+        margin: 0;
+    }
+
+    .container {
+        width: 500px;
+        margin: 2% auto;
+        border-radius: 15px;
+        background-color: rgba(243, 243, 248, 0.5);
+        box-shadow: 0 0 17px #333;
+        margin-bottom: 10px;
+    }
+
+    .header {
+        text-align: center;
+        padding-top: 20px;
+    }
+
+    .header h1 {
+        color: #201959;
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+
+    .main {
+        text-align: center;
+    }
+
+    .main input,
+    .main select,
+    /* Added select for dropdowns */
+    .main button {
+        width: 100%;
+        /* Make it responsive */
+        height: 40px;
+        border: none;
+        outline: none;
+        padding-left: 10px;
+        /* Adjusted for better padding */
+        box-sizing: border-box;
+        font-size: 15px;
+        color: #333;
+        margin-bottom: 20px;
+        /* Adjust margin */
+    }
+
+    .main button {
+        background-color: #83acf1;
+        letter-spacing: 1px;
+        font-weight: bold;
+    }
+
+    .main button:hover {
+        box-shadow: 2px 2px 5px #555;
+        background-color: #7799d4;
+    }
+
+    .main input:hover,
+    .main select:hover {
+        box-shadow: 2px 2px 5px #555;
+        background-color: #ddd;
+    }
+
+    .text-danger {
+        color: red;
+        /* Style for error messages */
+    }
+</style>
+<div class="container" style="height: 90%;"> <!-- Add main class here -->
+    <div class="header">
+        <h1 style="color: black;">Register</h1>
+    </div>
+    <div class="main">
+        <form method="POST" class="form-group" id="registrationForm">
+            {% csrf_token %}
+
+            <!-- First Name Field -->
+            <div class="form-group mb-3 row">
+                <div class="col-md-6">
+                    <label for="first_name">First Name</label>
+                    {{ form.first_name }}
+                    {% if form.first_name.errors %}
+                    <small class="text-danger">{{ form.first_name.errors }}</small>
+                    {% endif %}
+                </div>
+                <!-- </div> -->
+
+                <!-- Last Name Field -->
+                <!-- <div class="form-group mb-3"> -->
+                <div class="col-md-6">
+                    <label for="last_name">Last Name</label>
+                    {{ form.last_name }}
+                    {% if form.last_name.errors %}
+                    <small class="text-danger">{{ form.last_name.errors }}</small>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Username Field -->
+            <div class="form-group mb-3 row">
+                <div class="col-md-6">
+                    <label for="username">Username(Max. 10 characters)</label>
+                    {{ form.username }}
+                    {% if form.username.errors %}
+                    <small class="text-danger">{{ form.username.errors }}</small>
+                    {% endif %}
+                </div>
+
+                <!-- Mobile Number Field -->
+                <div class="col-md-6">
+                    <label for="mobile_number">Mobile Number</label>
+                    {{ form.mobile_number }}
+                    {% if form.mobile_number.errors %}
+                    <small class="text-danger">{{ form.mobile_number.errors }}</small>
+                    {% endif %}
+                </div>
+            </div>
+            <!-- Email Field -->
+            <div class="form-group mb-3 row">
+                <div class="col-md-9">
+                    <label for="email">Email</label>
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                    <small class="text-danger">{{ form.email.errors }}</small>
+                    {% endif %}
+                </div>
+
+                <!-- Age Field -->
+                <div class="col-md-3">
+                    <label for="age">Age</label>
+                    {{ form.age }}
+                    {% if form.age.errors %}
+                    <small class="text-danger">{{ form.age.errors }}</small>
+                    {% endif %}
+                </div>
+            </div>
+            <!-- Password Field -->
+            <div class="form-group mb-3">
+                <label for="password">Password</label>
+                {{ form.password }}
+                <small class="form-text text-muted" id="passwordCriteria">
+                    Must be at least 8 characters long, include an uppercase letter, a lowercase letter, a
+                    number, and a special character.
+                </small>
+                {% if form.password.errors %}
+                <small class="text-danger">{{ form.password.errors }}</small>
+                {% endif %}
+            </div>
+
+            <!-- Confirm Password Field -->
+            <div class="form-group mb-3">
+                <label for="confirm_password">Confirm Password</label>
+                {{ form.confirm_password }}
+                <small id="passwordMatch" class="form-text"></small>
+                {% if form.confirm_password.errors %}
+                <small class="text-danger">{{ form.confirm_password.errors }}</small>
+                {% endif %}
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn w-100" style="background-color: steelblue; margin-bottom: -10px; ">Register</button>
+        </form>
+        <p class="text-center mt-3">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+    </div>
+
+</div>
+
+
+<script>
+    const passwordField = document.getElementById('id_password');
+    const confirmPasswordField = document.getElementById('id_confirm_password');
+    const passwordCriteria = document.getElementById('passwordCriteria');
+    const passwordMatch = document.getElementById('passwordMatch');
+
+    passwordField.addEventListener('input', function () {
+        const password = passwordField.value;
+        let criteria = "Must contain: ";
+
+        if (!/[A-Z]/.test(password)) {
+            criteria += "One uppercase letter, ";
+        }
+        if (!/[a-z]/.test(password)) {
+            criteria += "One lowercase letter, ";
+        }
+        if (!/[0-9]/.test(password)) {
+            criteria += "One number, ";
+        }
+        if (!/[!@#$%^&*(),.?\":{}|<>]/.test(password)) {
+            criteria += "One special character, ";
+        }
+        if (password.length < 8) {
+            criteria += "At least 8 characters.";
+        }
+
+        passwordCriteria.innerText = criteria === "Must contain: " ? "Password meets all criteria!" : criteria;
+    });
+
+    confirmPasswordField.addEventListener('input', function () {
+        const confirmPassword = confirmPasswordField.value;
+        if (confirmPassword === passwordField.value) {
+            passwordMatch.innerHTML = '<span style="color: green;">Passwords match! ✔️</span>';
+        } else {
+            passwordMatch.innerHTML = '<span style="color: red;">Passwords do not match!</span>';
+        }
+    });
+</script>
+{% endblock %}

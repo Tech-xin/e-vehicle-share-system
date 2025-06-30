@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid mt-5">
+    <!-- Main Title and Summary -->
+    <h1 class="text-center mb-4">OUR VEHICLES</h1>
+    <p class="text-center mb-5">Explore our range of eco-friendly vehicles, designed to meet the needs of urban
+        transport. Whether you're looking for a quick ride or a longer journey, our e-scooters and e-bikes offer the
+        perfect solution to navigate the city efficiently while reducing your carbon footprint.</p>
+
+    <!-- E-Scooter Section -->
+    <div class="row mb-4" style="background-color:rgb(111, 174, 193);color: white; padding: 15px; border-radius: 15px;">
+        <div class="col-md-5">
+            <img src="{% static 'images/escooter.webp' %}" alt="E-Scooter" class="img-fluid rounded"
+                style="width: 100%; height: 100%; border-radius: 20 px; margin-left: 30px;">
+        </div>
+        <div class="col-md-6" style="margin-left: 40px;">
+            <div>
+                <h2 style="margin-top: 15px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                        class="bi bi-scooter" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M9 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-.39l1.4 7a2.5 2.5 0 1 1-.98.195l-.189-.938-2.43 3.527A.5.5 0 0 1 9.5 13H4.95a2.5 2.5 0 1 1 0-1h4.287l2.831-4.11L11.09 3H9.5a.5.5 0 0 1-.5-.5ZM3.915 12a1.5 1.5 0 1 0 0 1H2.5a.5.5 0 0 1 0-1h1.415Zm8.817-.789A1.499 1.499 0 0 0 13.5 14a1.5 1.5 0 0 0 .213-2.985l.277 1.387a.5.5 0 0 1-.98.196l-.278-1.387Z" />
+                    </svg>
+                    E-Scooters
+                </h2>
+                <p style="margin-top: 20px;">Our e-scooters are built for speed and convenience. Perfect for short city
+                    trips, they are
+                    eco-friendly and easy to use. With an intuitive control system and a top speed of 20mph, you'll
+                    navigate through urban environments with ease. They are lightweight, portable, and can be quickly
+                    charged, making them ideal for busy commuters. Safety is a priority, and each e-scooter comes
+                    equipped with advanced braking systems and headlights for night rides.</p>
+                <ul>
+                    <li>Top speed: 20mph</li>
+                    <li>Age requirement: 16+</li>
+                    <li>Price: £0.30 per minute</li>
+                    <li>Weight capacity: 220 lbs (100 kg)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- E-Bike Section -->
+    <div class="row mb-3" style="background-color: steelblue; color: white; padding: 15px; border-radius: 15px;">
+        <div class="col-md-5 order-md-2">
+            <img src="{% static 'images/ebike.avif' %}" alt="E-Bike" class="img-fluid rounded"
+                style="width: 100%; height: auto; margin-right: 0; border-radius: 10px;">
+        </div>
+        <div class="col-md-6 order-md-1" style="margin: 30px;">
+            <div>
+                <h2>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                        class="bi bi-bicycle" viewBox="0 0 16 16">
+                        <path
+                            d="M4 4.5a.5.5 0 0 1 .5-.5H6a.5.5 0 0 1 0 1v.5h4.14l.386-1.158A.5.5 0 0 1 11 4h1a.5.5 0 0 1 0 1h-.64l-.311.935.807 1.29a3 3 0 1 1-.848.53l-.508-.812-2.076 3.322A.5.5 0 0 1 8 10.5H5.959a3 3 0 1 1-1.815-3.274L5 5.856V5h-.5a.5.5 0 0 1-.5-.5zm1.5 2.443-.508.814c.5.444.85 1.054.967 1.743h1.139L5.5 6.943zM8 9.057 9.598 6.5H6.402L8 9.057zM4.937 9.5a1.997 1.997 0 0 0-.487-.877l-.548.877h1.035zM3.603 8.092A2 2 0 1 0 4.937 10.5H3a.5.5 0 0 1-.424-.765l1.027-1.643zm7.947.53a2 2 0 1 0 .848-.53l1.026 1.643a.5.5 0 1 1-.848.53L11.55 8.623z" />
+                    </svg>
+                    E-Bikes
+                </h2>
+                <p style="margin-top: 20px;">Our e-bikes combine the traditional bicycle experience with
+                    electric-powered assistance. Perfect for
+                    those who need a little help on long rides or hilly terrains, our e-bikes allow you to pedal with
+                    ease. Pedal-assist technology adjusts automatically to match your pace, making uphill climbs
+                    effortless.
+                    With adjustable gears, ergonomic seating, and extended battery life, our e-bikes are suitable for
+                    both
+                    commuting and recreational rides. They are also equipped with built-in GPS, so you can track your
+                    rides
+                    in
+                    real-time.</p>
+                <ul>
+                    <li>Top speed: 30mph</li>
+                    <li>Age requirement: 14+</li>
+                    <li>Price: £0.40 per minute</li>
+                    <li>Pedal-assist modes: Eco, Standard, Power</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

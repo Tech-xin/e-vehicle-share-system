@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid"
+    style="position: relative; overflow: hidden; width: calc(100% + 30px); height: 200px; display: flex; align-items: center; justify-content: flex-start; color: white; text-align: left; margin-top: -48px; margin-left: -15px; margin-right: -15px; padding: 0;">
+    <div
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 90%; background-image: url('/static/images/bg2.jpg'); background-size: cover; background-position: center; filter: blur(4px); z-index: 1;">
+    </div>
+    <div class="col-md-8 col-lg-6" style="width: 100%; position: relative; z-index: 2; padding-left: 20px;">
+        <h2 class="text-center mb-4 text-black"
+            style="font-size: 3rem; font-weight: bold; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); margin: 0;">
+            REPORT A DEFECTIVE VEHICLE</h2>
+
+    </div>
+</div>
+<div class="container mt-5">
+
+    <form method="post" action="{% url 'report_vehicle' %}">
+        {% csrf_token %}
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Vehicle ID</th>
+                    <th>Type</th>
+                    <th>City</th>
+                    <th>Rented At</th>
+                    <th>Returned At</th>
+                    <th>Rented Date</th>
+                    <th>Returned Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rental in rentals %}
+                <tr>
+                    <td>
+                        {% if rental.vehicle_id not in reported_vehicle_ids %}
+                        <input type="radio" name="vehicle_id" value="{{ rental.vehicle_id }}" required>
+                        {% else %}
+                        <span class="badge bg-danger">Reported</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ rental.vehicle_id }}</td>
+                    <td>{{ rental.vehicle.get_type_display }}</td>
+                    <td>{{ rental.city_name }}</td>
+                    <td>{{ rental.rented_at|default:"-" }}</td>
+                    <td>{{ rental.returned_at|default:"-" }}</td>
+                    <td>{{ rental.start_time|default:"-" }}</td>
+                    <td>{{ rental.end_time|default:"-" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="mb-3">
+            <label for="report_reason" class="form-label">Reason for Reporting:</label>
+            <textarea name="report_reason" id="report_reason" class="form-control" rows="4" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-danger">Report Defective Vehicle</button>
+    </form>
+
+    <!-- Reported Vehicles Section -->
+    <hr>
+    <h3>Reported Vehicles</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Vehicle ID</th>
+                <th>Type</th>
+                <th>City</th>
+                <th>Rented At</th>
+                <th>Reason for Reporting</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for report in reports %}
+            <tr>
+                <td>{{ report.vehicle_id }}</td>
+                <td>{{ report.vehicle.get_type_display }}</td>
+                <td>{{ report.vehicle.city_name }}</td>
+                <td>{{ report.vehicle.place_name|default:"-" }}</td>
+                <td>{{ report.report_reason }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

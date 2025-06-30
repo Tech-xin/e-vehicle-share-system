@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 style="margin-top: -20px; text-align: center;">Explore nearby car rental locations conveniently here!</h2>
+
+    <!-- Google Map Container -->
+    <div id="map" style="height: 600px; width: 100%; margin-top: 20px; margin-bottom: 20px; border: 3px solid black;"></div>
+</div>
+
+<!-- Google Maps JavaScript API -->
+<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCal_JMAaMyHzkCNb-6OmU4nULPZhow8Yw&callback=initMap"
+    async defer></script>
+
+<script>
+    let map;
+    let userMarker;
+    let vehicleMarkers = [];
+
+
+    const vehicles = [
+        { vehicleId: 1, lat: 55.8620, lng: -4.2520, type: "E-bike and  E-scooter", place: "Buchanan Street" },
+        { vehicleId: 2, lat: 55.8750, lng: -4.2930, type: "E-bike and  E-scooter", place: "Byres Road" },
+        { vehicleId: 3, lat: 55.8610, lng: -4.2500, type: "E-bike and  E-scooter", place: "George Square" },
+        { vehicleId: 4, lat: 55.8580, lng: -4.2470, type: "E-bike and  E-scooter", place: "Merchant City" },
+        { vehicleId: 5, lat: 55.8721, lng: -4.2886, type: "E-bike and  E-scooter", place: "University of Glasgow" },
+    ];
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: 55.8642, lng: -4.2518 },
+            zoom: 12
+        });
+
+        if (navigator.geolocation) {
+            console.log("Geolocation is supported by this browser.");
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const userLocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    console.log("User location:", userLocation);
+                    userMarker = new google.maps.Marker({
+                        position: userLocation,
+                        map: map,
+                        title: "You are here!",
+                        icon: {
+                            url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
+                            scaledSize: new google.maps.Size(40, 40)
+                        }
+                    });
+                    map.setCenter(userLocation);
+                    loadVehicleLocations();
+                },
+                (error) => {
+                    handleLocationError(error, map.getCenter());
+                }
+            );
+        } else {
+
+            handleLocationError({ message: "Browser doesn't support geolocation." }, map.getCenter());
+        }
+    }
+
+    function handleLocationError(error, pos) {
+        const message = error.message || "Geolocation service failed.";
+        console.error("Location error:", message);
+
+
+        const infoWindow = new google.maps.InfoWindow({
+            content: message,
+            position: pos
+        });
+        infoWindow.open(map);
+    }
+
+
+    function loadVehicleLocations() {
+        vehicles.forEach(vehicle => {
+            const vehicleLocation = {
+                lat: vehicle.lat,
+                lng: vehicle.lng
+            };
+
+
+            const vehicleMarker = new google.maps.Marker({
+                position: vehicleLocation,
+                map: map,
+                title: `Rent Center ID: ${vehicle.vehicleId} - ${vehicle.type} at ${vehicle.place}`,
+                icon: {
+                    url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                    scaledSize: new google.maps.Size(40, 40)
+                }
+            });
+
+
+            vehicleMarker.addListener('click', function () {
+                navigateToVehicle(vehicleMarker, vehicle);
+            });
+
+            vehicleMarkers.push(vehicleMarker);
+        });
+    }
+
+
+    function navigateToVehicle(vehicleMarker, vehicle) {
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const userLocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+
+                    //construct Google Maps navigation URL
+                    const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${userLocation.lat},${userLocation.lng}&destination=${vehicle.lat},${vehicle.lng}&travelmode=driving`;
+
+                    //shift to Google Maps navigation page
+                    window.open(googleMapsUrl, "_blank");
+                },
+                (error) => {
+                    console.error("Error getting user location for navigation:", error);
+                }
+            );
+        } else {
+            console.log("Geolocation not supported");
+        }
+    }
+</script>
+{% endblock %}

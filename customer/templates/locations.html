@@ -1,0 +1,384 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container-fluid"
+    style="position: relative; overflow: hidden; width: calc(100% + 30px); height: 550px; display: flex; align-items: center; justify-content: flex-start; color: white; text-align: left; margin-top: -48px; margin-left: -15px; margin-right: -12px; padding: 0;">
+    <div
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('/static/images/l1.jpg'); background-size: cover; background-position: center; filter: blur(4px); z-index: 1;">
+    </div>
+    <div style="width: 100%; position: relative; z-index: 2; padding-left: 20px;">
+        <h2 style="font-size: 4rem; font-weight: bold; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); margin: 0;">
+            EXPLORE OUR LOCATIONS</h2>
+        <p style="font-size: 1.5rem; margin-top: 10px; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);">
+            Your journey starts here. Browse all the cities across the UK.</p>
+    </div>
+</div>
+
+
+<div class="container">
+    <h2 style="text-align: center; font-size: 2.5rem; margin-top: 30px; color: darkblue;">Available Locations
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-geo"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M8 1a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z" />
+        </svg>
+    </h2>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; padding: 40px 0; gap: 20px;">
+
+        <div
+            style="background-color: #b4cdff; border: 1px solid #dcdcdc; border-radius: 5px; width: 30%; margin: 10px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Aberdeen</h3>
+            <div style="width: 100%; margin-top: 10px;">
+                <select onchange="showDetails(this.value, 'Aberdeen')"
+                    style="width: 100%; padding: 5px; border-radius: 3px; border: 1px solid #ced4da;">
+                    <option value="">Select Location</option>
+                    <option value="union-street">Union Street</option>
+                    <option value="marischal-college">Marischal College</option>
+                    <option value="aberdeen-beach">Aberdeen Beach</option>
+                    <option value="duthie-park">Duthie Park</option>
+                </select>
+            </div>
+            <div id="details-Aberdeen" style="display: none; text-align: left; margin-top: 10px; font-size: 0.9rem;">
+            </div>
+        </div>
+        <div
+            style="background-color: #b4cdff; border: 1px solid #dcdcdc; border-radius: 5px; width: 30%; margin: 10px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Birmingham</h3>
+            <div style="width: 100%; margin-top: 10px;">
+                <select onchange="showDetails(this.value, 'Birmingham')"
+                    style="width: 100%; padding: 5px; border-radius: 3px; border: 1px solid #ced4da;">
+                    <option value="">Select Location</option>
+                    <option value="bullring">Bullring & Grand Central</option>
+                    <option value="jewellery-quarter">Jewellery Quarter</option>
+                    <option value="mailbox">The Mailbox</option>
+                    <option value="digbeth">Digbeth</option>
+                </select>
+            </div>
+            <div id="details-Birmingham" style="display: none; text-align: left; margin-top: 10px; font-size: 0.9rem;">
+            </div>
+        </div>
+        <div
+            style="background-color: #b4cdff; border: 1px solid #dcdcdc; border-radius: 5px; width: 30%; margin: 10px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Brighton</h3>
+            <div style="width: 100%; margin-top: 10px;">
+                <select onchange="showDetails(this.value, 'Brighton')"
+                    style="width: 100%; padding: 5px; border-radius: 3px; border: 1px solid #ced4da;">
+                    <option value="">Select Location</option>
+                    <option value="brighton-pier">Brighton Pier</option>
+                    <option value="the-lanes">The Lanes</option>
+                    <option value="brighton-marina">Brighton Marina</option>
+                    <option value="hove">Hove</option>
+                </select>
+            </div>
+            <div id="details-Brighton" style="display: none; text-align: left; margin-top: 10px; font-size: 0.9rem;">
+            </div>
+        </div>
+        <div
+            style="background-color: #b4cdff; border: 1px solid #dcdcdc; border-radius: 5px; width: 30%; margin: 10px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Cambridge</h3>
+            <div style="width: 100%; margin-top: 10px;">
+                <select onchange="showDetails(this.value, 'Cambridge')"
+                    style="width: 100%; padding: 5px; border-radius: 3px; border: 1px solid #ced4da;">
+                    <option value="">Select Location</option>
+                    <option value="central">Central Cambridge</option>
+                    <option value="station">Cambridge Station</option>
+                    <option value="botanic-garden">Botanic Garden</option>
+                    <option value="river-cam">River Cam</option>
+                </select>
+            </div>
+            <div id="details-Cambridge" style="display: none; text-align: left; margin-top: 10px; font-size: 0.9rem;">
+                <!-- Details will appear here -->
+            </div>
+        </div>
+        <div
+            style="background-color: #b4cdff; border: 1px solid #dcdcdc; border-radius: 5px; width: 30%; margin: 10px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Dundee</h3>
+            <div style="width: 100%; margin-top: 10px;">
+                <select onchange="showDetails(this.value, 'Dundee')"
+                    style="width: 100%; padding: 5px; border-radius: 3px; border: 1px solid #ced4da;">
+                    <option value="">Select Location</option>
+                    <option value="city-centre">City Centre</option>
+                    <option value="v-a-dundee">V&A Dundee</option>
+                    <option value="discovery-point">Discovery Point</option>
+                    <option value="broughty-ferry">Broughty Ferry</option>
+                </select>
+            </div>
+            <div id="details-Dundee" style="display: none; text-align: left; margin-top: 10px; font-size: 0.9rem;">
+            </div>
+        </div>
+
+        <div
+            style="background-color: #b4cdff; border: 1px solid #dcdcdc; border-radius: 5px; width: 30%; margin: 10px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Edinburgh</h3>
+            <div style="width: 100%; margin-top: 10px;">
+                <select onchange="showDetails(this.value, 'Edinburgh')"
+                    style="width: 100%; padding: 5px; border-radius: 3px; border: 1px solid #ced4da;">
+                    <option value="">Select Location</option>
+                    <option value="princes-street">Princes Street</option>
+                    <option value="royal-mile">Royal Mile</option>
+                    <option value="leith">Leith</option>
+                    <option value="edinburgh-castle">Edinburgh Castle</option>
+                </select>
+            </div>
+            <div id="details-Edinburgh" style="display: none; text-align: left; margin-top: 10px; font-size: 0.9rem;">
+            </div>
+        </div>
+        <div
+            style="background-color: #b4cdff; border: 1px solid #dcdcdc; border-radius: 5px; width: 30%; margin: 10px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Glasgow</h3>
+            <div style="width: 100%; margin-top: 10px;">
+                <select onchange="showDetails(this.value, 'Glasgow')"
+                    style="width: 100%; padding: 5px; border-radius: 3px; border: 1px solid #ced4da;">
+                    <option value="">Select Location</option>
+                    <option value="buchanan-street">Buchanan Street</option>
+                    <option value="byres-road">Byres Road</option>
+                    <option value="george-square">George Square</option>
+                    <option value="merchant-city">Merchant City</option>
+                    <option value="uofg">University of Glasgow</option>
+                </select>
+            </div>
+            <div id="details-Glasgow" style="display: none; text-align: left; margin-top: 10px; font-size: 0.9rem;">
+            </div>
+        </div>
+
+        <div
+            style="background-color: #b4cdff; border: 1px solid #dcdcdc; border-radius: 5px; width: 30%; margin: 10px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Leeds</h3>
+            <div style="width: 100%; margin-top: 10px;">
+                <select onchange="showDetails(this.value, 'Leeds')"
+                    style="width: 100%; padding: 5px; border-radius: 3px; border: 1px solid #ced4da;">
+                    <option value="">Select Location</option>
+                    <option value="leeds-dock">Leeds Dock</option>
+                    <option value="roundhay-park">Roundhay Park</option>
+                    <option value="briggate">Briggate</option>
+                    <option value="millennium-square">Millennium Square</option>
+                </select>
+            </div>
+            <div id="details-Leeds" style="display: none; text-align: left; margin-top: 10px; font-size: 0.9rem;"></div>
+        </div>
+
+
+        <div
+            style="background-color: #b4cdff; border: 1px solid #dcdcdc; border-radius: 5px; width: 30%; margin: 10px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Liverpool</h3>
+            <div style="width: 100%; margin-top: 10px;">
+                <select onchange="showDetails(this.value, 'Liverpool')"
+                    style="width: 100%; padding: 5px; border-radius: 3px; border: 1px solid #ced4da;">
+                    <option value="">Select Location</option>
+                    <option value="albert-dock">Albert Dock</option>
+                    <option value="anfield">Anfield</option>
+                    <option value="sefton-park">Sefton Park</option>
+                    <option value="liverpool-one">Liverpool ONE</option>
+                </select>
+            </div>
+            <div id="details-Liverpool" style="display: none; text-align: left; margin-top: 10px; font-size: 0.9rem;">
+            </div>
+        </div>
+
+        <div
+            style="background-color: #b4cdff; border: 1px solid #dcdcdc; border-radius: 5px; width: 30%; margin: 10px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <h3 style="font-size: 1.5rem; margin-bottom: 10px;">London</h3>
+            <div style="width: 100%; margin-top: 10px;">
+                <select onchange="showDetails(this.value, 'London')"
+                    style="width: 100%; padding: 5px; border-radius: 3px; border: 1px solid #ced4da;">
+                    <option value="">Select Location</option>
+                    <option value="central">Central London</option>
+                    <option value="westminster">Westminster</option>
+                    <option value="camden">Camden</option>
+                    <option value="covent-garden">Covent Garden</option>
+                </select>
+            </div>
+            <div id="details-London" style="display: none; text-align: left; margin-top: 10px; font-size: 0.9rem;">
+            </div>
+        </div>
+
+        <div
+            style="background-color: #b4cdff; border: 1px solid #dcdcdc; border-radius: 5px; width: 30%; margin: 10px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Manchester</h3>
+            <div style="width: 100%; margin-top: 10px;">
+                <select onchange="showDetails(this.value, 'Manchester')"
+                    style="width: 100%; padding: 5px; border-radius: 3px; border: 1px solid #ced4da;">
+                    <option value="">Select Location</option>
+                    <option value="deansgate">Deansgate</option>
+                    <option value="northern-quarter">Northern Quarter</option>
+                    <option value="salford-quays">Salford Quays</option>
+                    <option value="piccadilly">Piccadilly</option>
+                </select>
+            </div>
+            <div id="details-Manchester" style="display: none; text-align: left; margin-top: 10px; font-size: 0.9rem;">
+            </div>
+        </div>
+
+        <div
+            style="background-color: #b4cdff; border: 1px solid #dcdcdc; border-radius: 5px; width: 30%; margin: 10px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Newcastle</h3>
+            <div style="width: 100%; margin-top: 10px;">
+                <select onchange="showDetails(this.value, 'Newcastle')"
+                    style="width: 100%; padding: 5px; border-radius: 3px; border: 1px solid #ced4da;">
+                    <option value="">Select Location</option>
+                    <option value="quayside">Quayside</option>
+                    <option value="grey-street">Grey Street</option>
+                    <option value="newcastle-university">Newcastle University</option>
+                    <option value="eldon-square">Eldon Square</option>
+                </select>
+            </div>
+            <div id="details-Newcastle" style="display: none; text-align: left; margin-top: 10px; font-size: 0.9rem;">
+            </div>
+        </div>
+
+        <div
+            style="background-color: #b4cdff; border: 1px solid #dcdcdc; border-radius: 5px; width: 30%; margin: 10px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Nottingham</h3>
+            <div style="width: 100%; margin-top: 10px;">
+                <select onchange="showDetails(this.value, 'Nottingham')"
+                    style="width: 100%; padding: 5px; border-radius: 3px; border: 1px solid #ced4da;">
+                    <option value="">Select Location</option>
+                    <option value="old-market-square">Old Market Square</option>
+                    <option value="wollaton-park">Wollaton Park</option>
+                    <option value="lace-market">Lace Market</option>
+                    <option value="nottingham-castle">Nottingham Castle</option>
+                </select>
+            </div>
+            <div id="details-Nottingham" style="display: none; text-align: left; margin-top: 10px; font-size: 0.9rem;">
+            </div>
+        </div>
+        <div
+            style="background-color: #b4cdff; border: 1px solid #dcdcdc; border-radius: 5px; width: 30%; margin: 10px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Oxford</h3>
+            <div style="width: 100%; margin-top: 10px;">
+                <select onchange="showDetails(this.value, 'Oxford')"
+                    style="width: 100%; padding: 5px; border-radius: 3px; border: 1px solid #ced4da;">
+                    <option value="">Select Location</option>
+                    <option value="oxford-center">Oxford City Center</option>
+                    <option value="headington">Headington</option>
+                    <option value="cowley-road">Cowley Road</option>
+                    <option value="summertown">Summertown</option>
+                </select>
+            </div>
+            <div id="details-Oxford" style="display: none; text-align: left; margin-top: 10px; font-size: 0.9rem;">
+                <!-- Details will appear here -->
+            </div>
+        </div>
+
+        <div
+            style="background-color: #b4cdff; border: 1px solid #dcdcdc; border-radius: 5px; width: 30%; margin: 10px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Sheffield</h3>
+            <div style="width: 100%; margin-top: 10px;">
+                <select onchange="showDetails(this.value, 'Sheffield')"
+                    style="width: 100%; padding: 5px; border-radius: 3px; border: 1px solid #ced4da;">
+                    <option value="">Select Location</option>
+                    <option value="peace-gardens">Peace Gardens</option>
+                    <option value="meadowhall">Meadowhall</option>
+                    <option value="sheffield-university">Sheffield University</option>
+                    <option value="kelham-island">Kelham Island</option>
+                </select>
+            </div>
+            <div id="details-Sheffield" style="display: none; text-align: left; margin-top: 10px; font-size: 0.9rem;">
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script>
+    function showDetails(location, city) {
+        const details = {
+            //London
+            "central": "Operating hours: 8 AM to 10 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "westminster": "Operating hours: 7 AM to 11 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "camden": "Operating hours: 6 AM to 9 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "covent-garden": "Operating hours: 8 AM to 10 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+
+            //Oxford
+            "oxford-center": "Operating hours: 7 AM to 9 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "headington": "Operating hours: 8 AM to 10 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "cowley-road": "Operating hours: 7 AM to 8 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "summertown": "Operating hours: 6 AM to 9 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            //Cambridge
+            "central": "Operating hours: 6 AM to 8 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "station": "Operating hours: 7 AM to 9 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "botanic-garden": "Operating hours: 8 AM to 10 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "river-cam": "Operating hours: 6 AM to 10 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            //Birmingham
+            "bullring": "Operating hours: 8 AM to 10 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "jewellery-quarter": "Operating hours: 7 AM to 11 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "mailbox": "Operating hours: 6 AM to 9 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "digbeth": "Operating hours: 8 AM to 10 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            //Manchester
+            "deansgate": "Operating hours: 7 AM to 9 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "northern-quarter": "Operating hours: 8 AM to 10 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "salford-quays": "Operating hours: 7 AM to 8 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "piccadilly": "Operating hours: 6 AM to 9 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            //Glasgow
+            "buchanan-street": "Operating hours: 8 AM to 10 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "byres-road": "Operating hours: 6 AM to 9 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "george-square": "Operating hours: 7 AM to 9 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "merchant-city": "Operating hours: 8 AM to 11 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "uofg": "Operating hours: 7 AM to 11 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            //Edinburgh
+            "princes-street": "Operating hours: 6 AM to 8 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "royal-mile": "Operating hours: 7 AM to 9 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "leith": "Operating hours: 8 AM to 10 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "edinburgh-castle": "Operating hours: 7 AM to 11 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            //Liverpool
+            "albert-dock": "Operating hours: 7 AM to 9 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "anfield": "Operating hours: 8 AM to 10 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "sefton-park": "Operating hours: 6 AM to 8 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "liverpool-one": "Operating hours: 7 AM to 11 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+
+            // Leeds
+            "leeds-dock": "Operating hours: 7 AM to 9 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "roundhay-park": "Operating hours: 6 AM to 8 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "briggate": "Operating hours: 8 AM to 10 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "millennium-square": "Operating hours: 7 AM to 11 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+
+            // Newcastle
+            "quayside": "Operating hours: 6 AM to 9 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "grey-street": "Operating hours: 8 AM to 10 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "newcastle-university": "Operating hours: 7 AM to 8 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "eldon-square": "Operating hours: 6 AM to 11 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+
+            // Sheffield
+            "peace-gardens": "Operating hours: 7 AM to 9 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "meadowhall": "Operating hours: 8 AM to 10 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "sheffield-university": "Operating hours: 6 AM to 8 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "kelham-island": "Operating hours: 7 AM to 11 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+
+            // Brighton
+            "brighton-pier": "Operating hours: 6 AM to 10 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "the-lanes": "Operating hours: 7 AM to 9 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "brighton-marina": "Operating hours: 8 AM to 11 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "hove": "Operating hours: 6 AM to 8 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+
+            // Nottingham
+            "old-market-square": "Operating hours: 7 AM to 9 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "wollaton-park": "Operating hours: 6 AM to 8 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "lace-market": "Operating hours: 8 AM to 10 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "nottingham-castle": "Operating hours: 7 AM to 11 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+
+            // Aberdeen
+            "union-street": "Operating hours: 6 AM to 10 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "marischal-college": "Operating hours: 7 AM to 9 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "aberdeen-beach": "Operating hours: 8 AM to 11 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "duthie-park": "Operating hours: 6 AM to 8 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+
+            // Dundee
+            "city-centre": "Operating hours: 7 AM to 9 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "v-a-dundee": "Operating hours: 8 AM to 10 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "discovery-point": "Operating hours: 6 AM to 8 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available.",
+            "broughty-ferry": "Operating hours: 7 AM to 11 PM.<br>Pay-As-You-Go: From £0.30 per minute.<br>Day Pass & Subscriptions available."
+        };
+
+        const detailContainer = document.getElementById(`details-${city}`);
+        if (location) {
+            detailContainer.style.display = "block";
+            detailContainer.innerHTML = details[location] || "Details not available.";
+        } else {
+            detailContainer.style.display = "none";
+        }
+    }
+</script>
+
+
+{% endblock %}

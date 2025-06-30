@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid"
+    style="position: relative; overflow: hidden; width: calc(100% + 30px); height: 220px; display: flex; align-items: center; justify-content: flex-start; color: white; text-align: left; margin-top: -48px; margin-left: -15px; margin-right: -15px; padding: 0; background-color: steelblue;">
+    <div
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('/static/images/bg2.jpg'); background-size: cover; background-position: center; filter: blur(3px); z-index: 1; opacity: 0.7;">
+    </div>
+    <div class="col-md-8 col-lg-6" style="width: 100%; position: relative; z-index: 2; padding-left: 20px;">
+        <h2 class="text-center mb-4"
+            style="font-size: 3.2rem; font-weight: bold; text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5); color: #f0f8ff; margin: 0;">
+            RENT YOUR VEHICLE</h2>
+    </div>
+</div>
+<div class="background-container">
+    <p class="text-center mb-4"
+        style="font-size: 1.1rem; margin-top: 20px; text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4); color: black;">
+        Select a vehicle and payment plan from the options below.</p>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <form id="rentalForm" method="post" action="{% url 'rent_vehicle' %}"
+                    class="shadow p-4 rounded bg-white">
+                    {% csrf_token %}
+
+                    <div class="mb-4">
+                        <label for="vehicle_type" class="form-label text-black">Select Vehicle Type:</label>
+                        <select name="vehicle_type" id="vehicle_type" class="form-select form-control-lg" required>
+                            <option value="scooter">E-Scooter</option>
+                            <option value="bike">E-Bike</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="city_name" class="form-label text-black">Select City:</label>
+                        <select name="city_name" id="city_name" class="form-select form-control-lg" required
+                            onchange="updatePlaces()">
+                            <option value="">Select a city</option>
+                            {% for city in cities %}
+                            <option value="{{ city }}">{{ city }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="rented_at" class="form-label text-black">Select Place:</label>
+                        <select name="rented_at" id="rented_at" class="form-select form-control-lg" required>
+                            <option value="">Select a place</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="payment_plan" class="form-label text-black">Select Payment Plan:</label>
+                        <select name="payment_plan" id="payment_plan" class="form-select form-control-lg" required>
+                            <option value="per_minute">Per Minute</option>
+                            <option value="day_pass">Day Pass (£7.99)</option>
+                            <option value="monthly">Monthly Subscription (£28.99)</option>
+                            <option value="annual">Annual Subscription (£149.99)</option>
+                        </select>
+                    </div>
+
+                    <div class="text-center mb-3">
+                        <button type="button" id="checkAvailabilityBtn" class="btn px-5 py-3 btn-custom" style="background-color: rgb(112, 160, 200);"
+                            onclick="checkAvailability()">Check Availability</button>
+                    </div>
+
+                    <div id="availabilityMessage" class="mt-3 text-center"></div>
+
+                    <div class="text-center">
+                        <button type="submit" id="rentBtn" name="action" value="rent" class="btn px-5 py-3"
+                            style="display: none; margin: 0 auto; background-color: rgb(112, 160, 200); margin-top: 10px;">Rent Vehicle</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function updatePlaces() {
+        const city = document.getElementById("city_name").value;
+        const placeSelect = document.getElementById("rented_at");
+
+        placeSelect.innerHTML = "<option value=''>Select a place</option>";
+
+        if (city) {
+            fetch(`/get_places/${city}/`)
+                .then(response => response.json())
+                .then(data => {
+                    data.places.forEach(place => {
+                        const option = document.createElement("option");
+                        option.value = place;
+                        option.textContent = place;
+                        placeSelect.appendChild(option);
+                    });
+                });
+        }
+    }
+
+    function checkAvailability() {
+        const formData = new FormData(document.getElementById('rentalForm'));
+        formData.append('action', 'check');
+
+        const checkBtn = document.getElementById('checkAvailabilityBtn');
+        checkBtn.disabled = true;
+        checkBtn.innerText = 'Checking...';
+
+        fetch("{% url 'rent_vehicle' %}", {
+            method: 'POST',
+            headers: { 'X-CSRFToken': '{{ csrf_token }}' },
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                const messageDiv = document.getElementById("availabilityMessage");
+
+                if (data.available) {
+                    messageDiv.innerHTML = data.message + `<br>Pricing: £${data.price_info[document.getElementById("payment_plan").value]}`;
+                    document.getElementById("rentBtn").style.display = "block";
+                } else {
+                    messageDiv.innerHTML = data.message;
+                    document.getElementById("rentBtn").style.display = "none";
+                }
+
+                checkBtn.disabled = false;
+                checkBtn.innerText = 'Check Availability';
+            })
+            .catch(error => {
+                messageDiv.innerHTML = 'There was an error checking availability. Please try again.';
+                checkBtn.disabled = false;
+                checkBtn.innerText = 'Check Availability';
+            });
+    }
+
+    const form = document.getElementById("rentalForm");
+    const rentBtn = document.getElementById("rentBtn");
+
+    form.addEventListener("input", function () {
+        rentBtn.disabled = !form.checkValidity();
+    });
+</script>
+{% endblock %}
+
+<style>
+    .background-container {
+        background-image: linear-gradient(to right, #4682b4, #b0c4de);
+        padding: 50px 0;
+    }
+
+    .form-label,
+    .text-black {
+        color: #333;
+    }
+
+    .btn-custom {
+        background-color: #4682b4;
+        color: #fff;
+        border: none;
+        border-radius: 25px;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .btn-custom:hover {
+        background-color: #5a9bd5;
+        transform: scale(1.05);
+    }
+
+    .form-control-lg {
+        font-size: 1.1rem;
+        padding: 10px;
+        border-radius: 12px;
+        border: 1px solid #b0c4de;
+    }
+
+    .container {
+        max-width: 800px;
+    }
+
+    .shadow {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+</style>

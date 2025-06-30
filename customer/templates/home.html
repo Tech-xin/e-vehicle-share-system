@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="container-fluid hero-section mt-5">
+    <div class="row align-items-center">
+        <!-- Image on the left -->
+        <div class="col-md-8">
+            <img class="img-fluid hero-image rounded" src="{% static 'images/home_mainpage.jpg' %}"
+                alt="E-Vehicle Share Image">
+        </div>
+
+        <!-- Text and Button on the right -->
+        <div class="col-md-4">
+            <div class="hero-text">
+                <h1>Welcome to EcoRide</h1>
+                <p style="margin-top: 25px;">The future of urban transportation is here.</p>
+                <p style="margin-top: -12px; margin-bottom: 25px;">Rent, Ride, and Save the planet!</p>
+                <a class="btn btn-lg" style="background-color: steelblue;" href="{% url 'login' %}">Get Started</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid my-5">
+    <!-- Section 1: How to Get Started -->
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Get Going!</h1>
+            <p style="margin-top: 20px;">Getting started with our electric vehicle service is simple. Just follow these
+                steps:</p>
+            <ol>
+                <li>Go to the web app and create your account.</li>
+                <li>Find a nearby vehicle using the app.</li>
+                <li>Simply add in the details to rent a vehicle.</li>
+                <li>Enjoy your ride, and return the vehicle to any available station.</li>
+            </ol>
+        </div>
+        <div class="col-md-6">
+            <img src="{% static 'images/about_us.jpg' %}" alt="Getting Started" class="img-fluid rounded">
+        </div>
+    </div>
+
+    <!-- Section 2: Vehicle Options -->
+    <div class="row my-5" style="background-color:cadetblue; color: white; padding: 40px; border-radius: 15px;">
+        <div class="col-md-4 text-center">
+            <img src="{% static 'images/v1.png' %}" alt="Bike Icon" class="img-fluid rounded-circle"
+                style="width: 250px; height: 250px;">
+        </div>
+        <div class="col-md-8">
+            <h2 style="font-size: 2.7rem;">Choose Your Bike</h2>
+            <p style="font-size: 1.2rem; margin-top: 20px;">We offer a range of vehicles to choose from, including
+                electric bikes and scooters. Availability varies
+                between cities.</p>
+            <a href="{% url 'vehicles' %}" class="btn btn-lg text-dark"
+                style="background-color: white; color: black; border: none; margin-top: 20px; padding: 10px 20px; border-radius: 8px;">
+                Vehicle Options →
+            </a>
+        </div>
+    </div>
+
+    <!-- Section 3 -->
+    <div class="row" style="background-color:steelblue; color: white; padding: 40px; border-radius: 15px;">
+        <div class="col-md-6 d-flex align-items-center">
+            <!-- First section with image and text -->
+            <img src="{% static 'images/safety.avif' %}" alt="Safety Icon" class="img-fluid rounded-circle me-3"
+                style="width: 180px; height: 180px;">
+            <div>
+                <h2 style="font-size: 2rem;">Guidelines</h2>
+                <p style="font-size: 1rem; margin-top: 15px;">Learn about our safety & parking guidelines as well as
+                    riding zones
+                    to make your ride an even better experience!</p>
+                <a href="{% url 'guidelines' %}" class="btn btn-lg text-dark"
+                    style="background-color: white; color: black; border: none; margin-top: 20px; padding: 10px 20px; border-radius: 8px;">
+                    Learn more →
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6 d-flex align-items-center">
+            <!-- Second section with text only -->
+            <img src="{% static 'images/loc.jpg' %}" alt="Safety Icon" class="img-fluid rounded-circle me-3"
+                style="width: 180px; height: 180px;">
+            <div>
+                <h2 style="font-size: 2rem;">Locations</h2>
+                <p style="font-size: 1rem; margin-top: 15px;">Locate and explore all the different cities that our
+                    vehicles and services
+                    are available in.</p>
+                <a href="{% url 'locations' %}" class="btn btn-lg text-dark"
+                    style="background-color: white; color: black; border: none; margin-top: 40px; padding: 10px 20px; border-radius: 8px;">
+                    Discover →
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row my-5" style="background-color: cadetblue; color: white; padding: 30px; border-radius: 15px;">
+        <div class="col-md-4 text-center">
+            <img src="{% static 'images/price.png' %}" alt="Bike Icon" class="img-fluid rounded-circle"
+                style="width: 230px; height: 230px;">
+        </div>
+        <div class="col-md-8">
+            <h2 style="font-size: 2.7rem;">Pricing</h2>
+            <p style="font-size: 1.2rem; margin-top: 20px;">Affordable and flexible pricing plans tailored for every
+                journey.
+                Choose the best option that suits your needs!</p>
+            <a href="{% url 'pricing' %}" class="btn btn-lg text-dark"
+                style="background-color: white; color: black; border: none; margin-top: 20px; padding: 10px 20px; border-radius: 8px;">
+                Explore →
+            </a>
+        </div>
+    </div>
+</div>
+<footer class="container-fluid d-flex justify-content-between align-items-center"
+    style="background-color: rgb(49, 97, 137); color: white; padding: 5px 20px; width: 102%; margin-left: -12px;">
+    <div style="display: flex; gap: 20px;">
+        <p style="margin: 0;">Email: <a href="mailto:EcoRide@gmail.com"
+                style="color: white; text-decoration: underline;">EcoRide@gmail.com</a></p>
+    </div>
+    <div>
+        <p style="margin: 0;">© 2024 EcoRide. All rights reserved.</p>
+    </div>
+</footer>
+
+
+{% endblock %}
