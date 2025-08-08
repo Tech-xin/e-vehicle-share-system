@@ -52,4 +52,27 @@ _However, it is recommended to create a login separately._
 1. Customer Features: Rent, return, report and pay for vehicles. 
 2. Operator Features: Track Vehicles, Update vehicle status, battery levels, and availability. Move vehicles to different locations in city.
 3. Manager: Create detailed reports of vehicle activities over specified time periods.
+   
+Jessica's Contribution Description:
 
+1. Issue Resolution and Feature Development:
+   - Tackled the issue where pop-up windows could not disappear, ensuring smooth user interactions.
+   - Created the move_vehicle.html page and added a left sidebar similar to Google Maps. At the same time, I implemented a form to move vehicles, which includes:
+     - Added the guest's GPS location on the map with a red marker.
+     - Implemented the "borrow a car nearby, return it on-site" functionality to enhance user convenience.
+     - Enabled the function to enter vehicle ID and select the rental center name to manage vehicles.
+
+2. Page Optimization and UI Design:
+   - Optimized the home_operator.html page, transforming it from a simple original layout to a more modern design. The page now utilizes a four-flex layout, with responsive images and shadow effects, improving the visual appeal.
+   - Changed the main image on the homepage and adjusted the layout.
+
+3. Login and Registration Page Improvements:
+   - Changed the background image of the login and registration pages and adjusted the CSS styles of the forms to meet modern design standards.
+   - Optimized base.html, adjusted the width of the navigation bar, and applied overall styling improvements to the pages.
+
+4. Feature Expansion:
+   - Integrated Google Navigation functionality to help guests quickly locate nearby parking spots. A "Map Navigation" option was added to the guest services drop-down menu, allowing guests to see their location and nearby parking spots clearly. By clicking on the parking spot icon, they can jump to the Google Navigation page for quick directions, significantly improving customer experience and work efficiency.
+
+5. Other Optimizations and Fixes:
+   - Enhanced the password addition method and added a user mark in the extra function section.
+   - Optimized base.html, login, registration, and homepage, improved background design and form styles, and upgraded the overall user experience.Although some parts were not included in the final version, the optimizations and modifications I made during the development process had an impact on the project. I learned a lot from these tasks and contributed to the improvements of the project.
